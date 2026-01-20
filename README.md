@@ -48,8 +48,8 @@
 
 - The following PostgreSQL queries are included in sql/analytical_queries.sql:
 
-- Rolling 7-day average revenue by zone
-  The result can be found via PostgreSQL:
+- Rolling 7-day average revenue by zone.
+- The result can be found via PostgreSQL:
   <img width="539" height="353" alt="image" src="https://github.com/user-attachments/assets/974eccc2-0e1a-4fdb-8f9c-b3639b139a97" />
 
 
