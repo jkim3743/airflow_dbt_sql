@@ -14,7 +14,13 @@
 ## Trigger the DAG in Airflow UI
 <img width="1886" height="397" alt="image" src="https://github.com/user-attachments/assets/28b13212-6c6e-460b-a91d-56641d045bb0" />
 
+'dbt_run_pipeline.py' contains airflow DAG code.
+
 ## Data Models
+
+# Raw data
+- January 2025 data is used.
+  
 # Staging
 - stg_yellow_tripdata
 
