@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_yellow_tripdata
+    description: "Cleaned and standardized yellow taxi trip data"
+
+    columns:
+      - name: pickup_datetime
+        tests:
+          - not_null
+
+      - name: dropoff_datetime
+        tests:
+          - not_null
+
+      - name: total_amount
+        tests:
+          - not_null
+  - name: stg_taxi_zones
+    description: "standardized NYC taxi zone lookup"
+    columns:
+      - name: location_id
+        tests: [not_null, unique]
+  
+  - name: green_tripdata_test
+    description: "normalized column names"
+    columns:
+      - name: vendor_id
+        test:
+        - not_null

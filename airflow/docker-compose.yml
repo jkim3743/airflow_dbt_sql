@@ -1,0 +1,62 @@
+services:
+  airflow-init:
+    image: apache/airflow:2.9.3
+    container_name: airflow-init
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://de_user:postgres@host.docker.internal:6543/de_db
+      AIRFLOW__CORE__FERNET_KEY: ""
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      PIP_ADDITIONAL_REQUIREMENTS: "dbt-core==1.11.2 dbt-postgres==1.10.0"
+      AIRFLOW__WEBSERVER__SECRET_KEY: "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6"
+    command: >
+      bash -c "airflow db init && airflow users create
+      --username admin --password admin
+      --firstname Admin --lastname User
+      --role Admin --email admin@example.com"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  airflow-webserver:
+    image: apache/airflow:2.9.3
+    container_name: airflow-webserver
+    depends_on:
+      - airflow-init
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://de_user:postgres@host.docker.internal:6543/de_db
+      AIRFLOW__CORE__FERNET_KEY: ""
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
+      PIP_ADDITIONAL_REQUIREMENTS: "dbt-core==1.11.2 dbt-postgres==1.10.0"
+      AIRFLOW__WEBSERVER__SECRET_KEY: "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ../dbt_project/my_dbt:/opt/airflow/dbt/my_dbt
+      - ../dbt_profiles:/opt/airflow/dbt_profiles
+    command: >
+      bash -lc "pip install -q --no-cache-dir dbt-core==1.11.2 dbt-postgres==1.10.0 && dbt --version && airflow webserver"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  airflow-scheduler:
+    image: apache/airflow:2.9.3
+    container_name: airflow-scheduler
+    depends_on:
+      - airflow-init
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://de_user:postgres@host.docker.internal:6543/de_db
+      AIRFLOW__CORE__FERNET_KEY: ""
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__WEBSERVER__SECRET_KEY: "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ../dbt_project/my_dbt:/opt/airflow/dbt/my_dbt
+      - ../dbt_profiles:/opt/airflow/dbt_profiles
+    command: >
+      bash -lc "pip install -q --no-cache-dir dbt-core==1.11.2 dbt-postgres==1.10.0 && dbt --version && airflow scheduler"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
