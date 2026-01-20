@@ -51,7 +51,9 @@
 - Rolling 7-day average revenue by zone. The result can be found via PostgreSQL:
   <img width="539" height="353" alt="image" src="https://github.com/user-attachments/assets/974eccc2-0e1a-4fdb-8f9c-b3639b139a97" />
 
+- Driver ranking by total revenue within each zone (my_dbt/models/marts/02_driver_ranking_by_total_revenue_zone.sql):
+  <img width="591" height="316" alt="image" src="https://github.com/user-attachments/assets/dfddbd75-d4bb-455b-a7a0-eadbd8a1f380" />
 
-- Driver ranking by total revenue within each zone
+- Peak hour detection by location (my_dbt/models/marts/03_peak_hour_detection_by_location.sql):
+  <img width="546" height="324" alt="image" src="https://github.com/user-attachments/assets/f6b85013-b5ec-4b10-b76f-7dabd15ff492" />
 
-- Peak hour detection by location
