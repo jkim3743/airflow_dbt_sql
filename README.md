@@ -21,7 +21,7 @@
 
 This Airflow DAG orchestrates dbt transformations and data quality checks on a daily schedule.
 
-## The Airflow DAG performs the following
+## The Airflow DAGs performs the following
 
 1. Runs dbt models
 2. Executes dbt run to build staging and fact models
