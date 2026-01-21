@@ -1,5 +1,5 @@
 # Airflow_dbt_sql project
-
+This project demonstrates an end-to-end data pipeline built with Airflow, PostgreSQL, and dbt to ingest, validate, transform, and analyze NYC Yellow Taxi trip data at scale.
 # Setup Instructions
 1. Clone the Repository
 2. Start Docker 
