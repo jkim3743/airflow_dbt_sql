@@ -37,8 +37,6 @@ This Airflow DAG orchestrates dbt transformations and data quality checks on a d
 3. dbt is run from the project directory using a specified profiles.yml
 4. Only selected models and their dependencies are executed
 
-## Data Models
-
 # Raw data
 - January 2025 data is used. You can find more data at: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
   
