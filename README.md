@@ -21,33 +21,21 @@
 
 This Airflow DAG orchestrates dbt transformations and data quality checks on a daily schedule.
 
-## What this pipeline does
+## The Airflow DAG performs the following
 
-Runs dbt models
+1. Runs dbt models
+2. Executes dbt run to build staging and fact models
+3. Transforms raw taxi trip data into analytics-ready tables
+4. Validates data quality
+5. Executes dbt test after the run completes
+6. Ensures key constraints and data assumptions are met
+7. Enforces execution order
 
-Executes dbt run to build staging and fact models
-
-Transforms raw taxi trip data into analytics-ready tables
-
-Validates data quality
-
-Executes dbt test after the run completes
-
-Ensures key constraints and data assumptions are met
-
-Enforces execution order
-
-dbt test only runs if dbt run succeeds
-
-How it works
-
-The DAG is scheduled to run daily
-
-It uses Airflow’s BashOperator to execute dbt CLI commands
-
-dbt is run from the project directory using a specified profiles.yml
-
-Only selected models and their dependencies are executed
+## How it works
+1. The DAG is scheduled to run daily
+2. It uses Airflow’s BashOperator to execute dbt CLI commands
+3. dbt is run from the project directory using a specified profiles.yml
+4. Only selected models and their dependencies are executed
 
 ## Data Models
 
