@@ -2,23 +2,57 @@
 
 # Setup Instructions
 1. Clone the Repository
-2. Start Services with Docker (type 'docker -compose up -d) in git bash
-3. Access Airflow UI
+2. Start Docker 
+3. Connect PostgreSQL and Airflow with Docker:
+   - For PostgreSQL, type: docker start de-postgres in git bash
+   - For Airflow, type: docker -compose up -d in git bash
+4. Access Airflow UI
    URL: http://localhost:8080
     Default credentials:
     Username: airflow
     Password: airflow
-4. Verify PostgreSQL Connection
+5. Verify PostgreSQL Connection:
+   - type docker ps in git bash
 
 ## Trigger the DAG in Airflow UI
 <img width="1886" height="397" alt="image" src="https://github.com/user-attachments/assets/28b13212-6c6e-460b-a91d-56641d045bb0" />
 
-'dbt_run_pipeline.py' contains airflow DAG code.
+'dbt_run_pipeline.py' contains airflow DAGs code.
+
+This Airflow DAG orchestrates dbt transformations and data quality checks on a daily schedule.
+
+What this pipeline does
+
+Runs dbt models
+
+Executes dbt run to build staging and fact models
+
+Transforms raw taxi trip data into analytics-ready tables
+
+Validates data quality
+
+Executes dbt test after the run completes
+
+Ensures key constraints and data assumptions are met
+
+Enforces execution order
+
+dbt test only runs if dbt run succeeds
+
+How it works
+
+The DAG is scheduled to run daily
+
+It uses Airflow’s BashOperator to execute dbt CLI commands
+
+dbt is run from the project directory using a specified profiles.yml
+
+Only selected models and their dependencies are executed
 
 ## Data Models
 
 # Raw data
-- January 2025 data is used.
+- January 2025 data is used. You can find more data at: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
   
 # Staging
 - stg_yellow_tripdata
