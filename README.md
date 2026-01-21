@@ -4,15 +4,15 @@
 1. Clone the Repository
 2. Start Docker 
 3. Connect PostgreSQL and Airflow with Docker:
-   - For PostgreSQL, type: docker start de-postgres in git bash
-   - For Airflow, type: docker -compose up -d in git bash
+   - For PostgreSQL, type: 'docker start de-postgres' in git bash
+   - For Airflow, type: 'docker -compose up -d' in git bash
 4. Access Airflow UI
    URL: http://localhost:8080
     Default credentials:
     Username: airflow
     Password: airflow
 5. Verify PostgreSQL Connection:
-   - type docker ps in git bash
+   - type 'docker ps' in git bash
 
 ## Trigger the DAG in Airflow UI
 <img width="1886" height="397" alt="image" src="https://github.com/user-attachments/assets/28b13212-6c6e-460b-a91d-56641d045bb0" />
@@ -21,7 +21,7 @@
 
 This Airflow DAG orchestrates dbt transformations and data quality checks on a daily schedule.
 
-What this pipeline does
+## What this pipeline does
 
 Runs dbt models
 
